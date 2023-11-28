@@ -14,10 +14,10 @@ public class AppAutomation {
 	
 	public static WebDriver setupDriver(String browserName) {
 		if (browserName.equalsIgnoreCase("chrome")) {
-			driver = ChromeDriverSetup.getWebDriver();
+			driver = DriverSetup.getChromeDriver();
 		}
 		else {
-			driver = EdgeDriverSetup.getWebDriver();
+			driver = DriverSetup.getEdgeDriver();
 		}
 		driver.manage().window().maximize();
 		driver.get("https://www.snapdeal.com/");
