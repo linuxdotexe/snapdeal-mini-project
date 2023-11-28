@@ -16,4 +16,4 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 .settings/
-src/main/resources/Output.xlsx
+src/test/resources/Output.xlsx
