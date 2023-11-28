@@ -1,6 +1,5 @@
 package project.mini;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +19,12 @@ public class AppAutomation {
 		else {
 //			driver = EdgeDriverSetup.getWebDriver();
 		}
+		driver.manage().window().maximize();
+		driver.get("https://www.snapdeal.com/");
 		return driver;
 	}
 	
 	public static void search(String data) {
-		driver.manage().window().maximize();
-		driver.get("https://www.snapdeal.com/");
 		driver.findElement(By.id("inputValEnter")).sendKeys(data);
 		driver.findElement(By.xpath("//button[contains(@class, 'searchformButton')]")).click();
 	}
@@ -46,31 +45,26 @@ public class AppAutomation {
 		driver.findElement(By.xpath("//div[@class='price-go-arrow btn btn-line btn-theme-secondary']")).click();
 	}
 	
-	public static void returnTopFive() {
-		List<WebElement> nameElements = driver.findElements(By.className("product-title"));
-		List<String> names = new ArrayList<String>();
-		for (WebElement name: nameElements) {
-			names.add(name.getText());
+	public static Map<String, String> returnTopFive() throws Exception {
+		Thread.sleep(2000);
+		List<WebElement> nameAndPrice = driver.findElements(By.className("product-tuple-description"));
+		Map<String, String> namesAndPricesMap = new HashMap<String, String>();
+		for (int i=0; i<5; i++) {
+			String productText[] = nameAndPrice.get(i).getText().split("\n");
+			namesAndPricesMap.put(productText[0], productText[2]);
 		}
-		
-		List<WebElement> priceElements = driver.findElements(By.xpath("//span[@class='lfloat product-price']"));
-		List<String> prices = new ArrayList<String>();
-		for (WebElement price: priceElements) {
-			prices.add(price.getText());
-		}
-		
-		Map<String, String> nameAndPrice = new HashMap<String, String>();
-		for (Map.Entry<String, String> entry : nameAndPrice.entrySet()) {
-			System.out.println(entry.getKey() + entry.getValue());
-		}
+		// System.out.println(namesAndPricesMap);
+		return namesAndPricesMap;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		driver = AppAutomation.setupDriver("chrome");
-		AppAutomation.search("Bluetooth headphone");
+		String inputData = ImportInputData.getExcelData();
+		AppAutomation.search(inputData);
 		AppAutomation.sort();
 		AppAutomation.returnTopFive();
+		driver.close();
 
 	}
 
