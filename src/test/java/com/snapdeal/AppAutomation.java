@@ -1,4 +1,4 @@
-package project.mini;
+package com.snapdeal;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,10 +8,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.snapdeal.util.DriverSetup;
+
 public class AppAutomation {
+public static WebDriver driver;
 	
-	public static WebDriver driver;
-	
+	// Setup driver for Chrome or Edge.
 	public static WebDriver setupDriver(String browserName) {
 		if (browserName.equalsIgnoreCase("chrome")) {
 			driver = DriverSetup.getChromeDriver();
@@ -24,11 +26,13 @@ public class AppAutomation {
 		return driver;
 	}
 	
+	// First task - Search for products based on input.
 	public static void search(String data) {
 		driver.findElement(By.id("inputValEnter")).sendKeys(data);
 		driver.findElement(By.xpath("//button[contains(@class, 'searchformButton')]")).click();
 	}
 	
+	// Sort by popularity and give price range 700-1400
 	public static void sort() {
 		
 		driver.findElement(By.xpath("//div[contains(@class, 'sort-drop')]")).click();
@@ -45,27 +49,21 @@ public class AppAutomation {
 		driver.findElement(By.xpath("//div[@class='price-go-arrow btn btn-line btn-theme-secondary']")).click();
 	}
 	
-	public static Map<String, String> returnTopFive() throws Exception {
-		Thread.sleep(2000);
+	// Return list of first five results.
+	public static Map<String, String> returnTopFive() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		List<WebElement> nameAndPrice = driver.findElements(By.className("product-tuple-description"));
 		Map<String, String> namesAndPricesMap = new HashMap<String, String>();
 		for (int i=0; i<5; i++) {
 			String productText[] = nameAndPrice.get(i).getText().split("\n");
 			namesAndPricesMap.put(productText[0], productText[2]);
 		}
-		// System.out.println(namesAndPricesMap);
+		System.out.println(namesAndPricesMap);
 		return namesAndPricesMap;
 	}
-
-	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-		driver = AppAutomation.setupDriver("chrome");
-		String inputData = ImportInputData.getExcelData();
-		AppAutomation.search(inputData);
-		AppAutomation.sort();
-		AppAutomation.returnTopFive();
-		driver.close();
-
-	}
-
 }

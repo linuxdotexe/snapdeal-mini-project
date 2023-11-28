@@ -1,4 +1,4 @@
-package project.mini;
+package com.snapdeal.util;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -9,10 +9,11 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class OutputData {
+public class WriteData {
 	
+	// Writes the extracted data into Output.xlsx
 	public static void outputData (Map<String, String> data) throws Exception {
-		FileOutputStream file = new FileOutputStream(System.getProperty("user.dir") + "\\src\\main\\resources\\Output.xlsx");
+		FileOutputStream file = new FileOutputStream(System.getProperty("user.dir") + "\\src\\test\\resources\\Output.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet("Output");
 		
@@ -32,9 +33,4 @@ public class OutputData {
 		workbook.write(file);
 		workbook.close();
 	}
-
-	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-	}
-
 }
