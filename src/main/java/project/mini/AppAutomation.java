@@ -17,7 +17,7 @@ public class AppAutomation {
 			driver = ChromeDriverSetup.getWebDriver();
 		}
 		else {
-//			driver = EdgeDriverSetup.getWebDriver();
+			driver = EdgeDriverSetup.getWebDriver();
 		}
 		driver.manage().window().maximize();
 		driver.get("https://www.snapdeal.com/");
