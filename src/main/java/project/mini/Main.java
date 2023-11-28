@@ -14,7 +14,12 @@ public class Main {
 		Map<String, String> outputData = AppAutomation.returnTopFive();
 		OutputData.outputData(outputData);
 		driver.close();
-
+		
+		driver = AppAutomation.setupDriver("edge");
+		AppAutomation.search(inputData);
+		AppAutomation.sort();
+		outputData = AppAutomation.returnTopFive();
+		OutputData.outputData(outputData);
+		driver.close();
 	}
-
 }
