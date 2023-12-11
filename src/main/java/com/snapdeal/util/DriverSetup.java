@@ -11,7 +11,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverSetup {
-	
+
 	// Method to setup Chrome driver.
 	public static WebDriver getChromeDriver() {
 		WebDriverManager.chromedriver().setup();
@@ -22,7 +22,7 @@ public class DriverSetup {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		return driver;
 	}
-	
+
 	// Method to setup Edge driver.
 	public static WebDriver getEdgeDriver() {
 		WebDriverManager.edgedriver().setup();

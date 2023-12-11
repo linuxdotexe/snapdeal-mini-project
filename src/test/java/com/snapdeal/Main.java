@@ -6,7 +6,7 @@ import com.snapdeal.util.ReadData;
 import com.snapdeal.util.WriteData;
 
 public class Main {
-	
+
 	// Main method. Performs the task.
 	public static void main(String[] args) throws Exception {
 		// Setup driver to perform task in Chrome
@@ -21,7 +21,7 @@ public class Main {
 		Map<String, String> outputData = AppAutomation.returnTopFive();
 		// Write output data to Output.xlsx
 		WriteData.outputData(outputData);
-		
+
 		// Setup driver to perform task in Edge
 		AppAutomation.setupDriver("edge");
 		// Perform search operation of the task

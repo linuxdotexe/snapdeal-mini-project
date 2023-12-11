@@ -10,21 +10,21 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class WriteData {
-	
+
 	// Writes the extracted data into Output.xlsx
 	public static void outputData (Map<String, String> data) throws Exception {
 		FileOutputStream file = new FileOutputStream(System.getProperty("user.dir") + "\\src\\test\\resources\\Output.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet("Output");
-		
+
 		List<String> keys = new ArrayList<String>();
 		List<String> values = new ArrayList<String>();
-		
+
 		for (Map.Entry<String, String> entry : data.entrySet()) {
 			keys.add(entry.getKey());
 			values.add(entry.getValue());
 		}
-		
+
 		for (int i=0; i<5; i++) {
 			XSSFRow row = sheet.createRow(i);
 			row.createCell(0).setCellValue(keys.get(i));

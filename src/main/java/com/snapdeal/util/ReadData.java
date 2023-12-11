@@ -6,7 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ReadData {
-	
+
 	// Reads data from Input.xlsx
 	public static String getExcelData() throws Exception {
 		FileInputStream file = new FileInputStream(System.getProperty("user.dir") + "\\src\\test\\resources\\Input.xlsx");
